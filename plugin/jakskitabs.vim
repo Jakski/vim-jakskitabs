@@ -1,6 +1,6 @@
 " Vim JakskiTabs plugin for tab names managment
 " Author: Jakub Pieńkowski <jakub@jakski.name>
-" Home: https://github.com/Jakski/JakskiTabs
+" Home: https://github.com/Jakski/vim-jakskitabs
 " License: MIT
 
 if exists("g:loaded_jakskitabs")
