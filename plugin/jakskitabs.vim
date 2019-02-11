@@ -12,7 +12,7 @@ let g:loaded_jakskitabs = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-func s:parse_tab_string() abort
+func! s:parse_tab_string() abort
 	return map(split(g:JakskiTabs_tabnames, '\n'), "split(v:val, '\t')")
 endfunc
 
@@ -24,7 +24,7 @@ func s:save_tabs(tabnames) abort
 	let g:JakskiTabs_tabnames = tabnames
 endfunc
 
-func JakskiTabs_load() abort
+func! JakskiTabs_load() abort
 	let tabnames = {}
 	for [checksum, name] in s:parse_tab_string()
 		let tabnames[checksum] = name
@@ -32,17 +32,19 @@ func JakskiTabs_load() abort
 	let s:tabnames = tabnames
 endfunc
 
-func JakskiTabs_set_name() abort
+func! JakskiTabs_set_name() abort
 	let tabname = input('Enter tabname: ')
 	if tabname =~ '\t'
 		echoerr "Tabname can't contain tabs" 
+	elseif empty(tabname)
+		echoerr "Tabname can't be empty"
 	else
 		let s:tabnames[sha256(getcwd(-1))[:15]] = tabname
 		call s:save_tabs(s:tabnames)
 	endif
 endfunc
 
-func JakskiTabs_line() abort
+func! JakskiTabs_line() abort
 	let s = ''
 	for i in range(tabpagenr('$'))
 		let i += 1
