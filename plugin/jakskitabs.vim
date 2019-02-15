@@ -16,7 +16,7 @@ func! s:parse_tab_string() abort
 	return map(split(g:JakskiTabs_tabnames, '\n'), "split(v:val, '\t')")
 endfunc
 
-func s:save_tabs(tabnames) abort
+func! s:save_tabs(tabnames) abort
 	let tabnames = ''
 	for [checksum, name] in items(a:tabnames)
 		let tabnames .= checksum . "\t" . name . "\n"
@@ -42,6 +42,7 @@ func! JakskiTabs_set_name() abort
 		let s:tabnames[sha256(getcwd(-1))[:15]] = tabname
 		call s:save_tabs(s:tabnames)
 	endif
+	set showtabline=1
 endfunc
 
 func! JakskiTabs_line() abort
