@@ -36,9 +36,7 @@ func! JakskiTabs_set_name() abort
 	let tabname = input('Enter tabname: ')
 	if tabname =~ '\t'
 		echoerr "Tabname can't contain tabs" 
-	elseif empty(tabname)
-		echoerr "Tabname can't be empty"
-	else
+	elseif !empty(tabname)
 		let s:tabnames[sha256(getcwd(-1))[:15]] = tabname
 		call s:save_tabs(s:tabnames)
 	endif
